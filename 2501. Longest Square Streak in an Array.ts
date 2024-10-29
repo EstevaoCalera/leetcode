@@ -1,12 +1,15 @@
 export function longestSquareStreak(nums: number[]): number {
   nums = nums.sort((a, b) => b - a);
+  nums = [...new Set(nums)];
   let maxStreak: number[] = [];
-  for (const num of nums) {
-    let streak = [num];
-    let nextSquareRoot = findSquareRoot(num, nums);
+  while (nums.length > maxStreak.length) {
+    let streak = [nums[0]];
+    let nextSquareRoot = findSquareRoot(nums[0], nums);
+    nums.splice(0, 1);
 
     while (nextSquareRoot) {
       streak.push(nextSquareRoot);
+      nums.splice(nums.indexOf(nextSquareRoot), 1);
       nextSquareRoot = findSquareRoot(nextSquareRoot, nums);
     }
 
@@ -14,6 +17,7 @@ export function longestSquareStreak(nums: number[]): number {
       maxStreak = streak;
     }
   }
+
   return maxStreak.length > 1 ? maxStreak.length : -1;
 };
 
