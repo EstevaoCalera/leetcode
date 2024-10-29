@@ -1,4 +1,5 @@
-export function longestSquareStreak(nums: number[]): number {
+// 2501. Longest Square Streak in an Array
+function longestSquareStreak(nums: number[]): number {
   const set = new Set(nums);
   let maxStreak = 1;
   for (let item of set) {
@@ -12,3 +13,5 @@ export function longestSquareStreak(nums: number[]): number {
   }
   return maxStreak > 1 ? maxStreak : -1;
 };
+
+console.log(`Longest streak: ${longestSquareStreak([2, 4, 5, 8, 25])}`);
