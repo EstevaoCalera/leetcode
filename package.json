@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node ./index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "2501": "ts-node 2501.ts"
+    "2501": "ts-node 2501.ts",
+    "2684": "ts-node 2684.ts"
   },
   "keywords": [],
   "author": "",
