@@ -1,9 +1,15 @@
 function primeSubOperation(nums: number[]): boolean {
+  let primeSet = new Set();
   const isPrime = (num: number): boolean => {
+    if (primeSet.has(num)) return true;
     for (let i = 2; i <= Math.sqrt(num); i++) {
       if (num % i === 0) return false;
     }
-    return num > 1;
+    if (num > 1) {
+      primeSet.add(num);
+      return true;
+    }
+    return false;
   };
   const biggestPrime = (num: number): number => {
     num--;
