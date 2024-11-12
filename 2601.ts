@@ -1,50 +1,27 @@
 function primeSubOperation(nums: number[]): boolean {
-  if (isStrictelySorted(nums)) {
-    return true;
-  }
-  for (let i = nums.length - 2; i >= 0; i--) {
-    if (nums[i + 1] > nums[i]) {
-      continue;
+  const isPrime = (num: number): boolean => {
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
     }
-    const num = primeSub(nums[i], nums[i + 1]);
-    if (!num) {
-      return false;
+    return num > 1;
+  };
+  const biggestPrime = (num: number): number => {
+    num--;
+    while (!isPrime(num)) {
+      if (num < 1) return 0;
+      num--;
     }
-    nums[i] = num;
-  }
+    return num;
+  };
 
-  return isStrictelySorted(nums);
-};
-
-function isStrictelySorted(nums: number[]): boolean {
-  if (nums.length === 1) {
-    return true;
-  }
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i + 1] <= nums[i]) {
+  nums[0] -= biggestPrime(nums[0]);
+  for (let i = 1; i < nums.length; i++) {
+    nums[i] -= biggestPrime(nums[i] - nums[i - 1]);
+    if (nums[i] <= nums[i - 1]) {
       return false;
     }
   }
   return true;
-}
+};
 
-function primeSub(num: number, max: number): number | null {
-  for (let i = 2; num - i > 0; i++) {
-    if (!isPrime(i)) {
-      continue;
-    }
-    if (num - i < max) {
-      return num - i;
-    }
-  }
-  return null;
-}
-
-function isPrime(num: number): boolean {
-  for (let i = 2, s = Math.sqrt(num); i <= s; i++) {
-    if (num % i === 0) return false;
-  }
-  return num > 1;
-}
-
-console.log(primeSubOperation([4, 9, 6, 10]));
+console.log(primeSubOperation([2, 2]));
