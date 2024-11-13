@@ -1,5 +1,5 @@
-function main() {
-  console.log('main');
+async function main(fileName: string) {
+  await import(`./codes/${fileName}`);
 }
 
-main();
+main(process.argv[2]);
